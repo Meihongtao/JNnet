@@ -1,4 +1,4 @@
-#include "../../combine.h"
+#include <JNnet.h>
 
 class TimeTaskServer{
 public:

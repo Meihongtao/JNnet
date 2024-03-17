@@ -261,7 +261,7 @@ void EventLoop::add_in_loop(std::function<void()> job){
     if(!is_in_loop_thread() || calling_pending_func_){
         wakeup();
     }
-}
+} 
 
 void EventLoop::run_in_loop(func func){
     if(is_in_loop_thread()){
@@ -274,6 +274,7 @@ void EventLoop::run_in_loop(func func){
 
 void EventLoop::do_append_jobs(){
     std::vector<std::function<void()>> jobs;
+    calling_pending_func_ = true;
     {
         std::unique_lock<std::mutex> lock(mtx_);
         jobs.swap(jobs_); // 交换的方式减少了锁的临界区范围 提升效率 同时避免了死锁 如果执行functor()在临界区内 且functor()中调用queueInLoop()就会产生死锁
@@ -283,6 +284,7 @@ void EventLoop::do_append_jobs(){
     {
         func(); // 执行当前loop需要执行的回调操作
     }
+    calling_pending_func_ = false;
 }
 
 void EventLoop::run_at(TimeStamp time,func cb){
