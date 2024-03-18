@@ -1,6 +1,13 @@
 # JNnet网络库
 # 使用
-`sudo ./build.sh`
+1. 安装根目录下JNnet库 `sudo ./build.sh`
+
+2. 生成http服务器，`cd ./example/http_server` 然后 `make`
+
+# 压力测试
+10k个客户端发送500k个请求
+
+![这是图片](./image/stress_test.png "Magic Gardens")
 # 主要类的实现
 ## Buffer类的设计
 Buffer类设计是为了让网络库的阻塞尽量发生在`select/poll/epoll_wait`上的IO复用函数上。

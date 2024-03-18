@@ -30,7 +30,7 @@ namespace detail
             resp->set_status_code(HttpResponse::k200Ok);
             resp->set_status_message("OK");
             resp->set_content_type("text/html");
-            resp->add_header("Server", "Muduo");
+            resp->add_header("Server", "JNnet");
             // string now = Timestamp::now().toFormattedString();
             resp->set_body("<html><head><title>This is title</title></head>"
                 "<body><h1>Hello</h1>This is index Page "
@@ -149,8 +149,8 @@ private:
 
 int main(){
     EventLoop *loop = new EventLoop();
-    // InetAddress addr = InetAddress(7788,"172.21.140.98");
-     InetAddress addr = InetAddress(7788,"127.0.0.1");
+    InetAddress addr = InetAddress(7788,"172.21.140.98");
+    //  InetAddress addr = InetAddress(7788,"127.0.0.1");
     // TcpServer * server = new TcpServer(loop,addr);
     HttpServer * server = new HttpServer(loop,addr,"as");
     server->start();
